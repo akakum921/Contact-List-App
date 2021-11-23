@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= locals.title %></title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <!-- our css file should be below all other styles so that we can overide it -->
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <h1 id="page-heading">
+        <i class="far fa-address-book"></i>
+        My Contacts List
+    </h1>
+    <div id="contacts-list-container">
+      <ul>
+        <% for(let i of contact_list) { %>
+        <div class="contact">
+          <li>
+            <div class="details">
+              <p id="name"> <i class="fas fa-user"></i> &nbsp;&nbsp;<%= i.name %></p>
+              <p id="phone"><i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;<%= i.phone %></p>
+            </div>
+
+            <div class="delete-button">
+               <a href="/delete-contact/?phone=<%= i.phone %>">
+                <i class="fas fa-window-close"></i>
+               </a>
+            </div>
+          </li>
+        </div>
+        
+        <% }%>
+      </ul>
+    </div>
+
+    <form id="new-contact-form" action="/create-contact" method="POST">
+      <input type="text" name="name" placeholder="Enter Name" required />
+      <input type="number" name="phone" placeholder="Enter Mobile Number" required/>
+
+      <button id="submit-button" type="submit">Add Contact</button>
+    </form>
+
+    <script type="text/javascript" src="/js/home.js"></script>
+  </body>
+</html>
